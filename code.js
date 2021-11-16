@@ -1,70 +1,62 @@
 
-//Create function that plays the game
-function playRound (playerSelection, computerSelection) {
- 
 //Create variables for user and Computer
-var playerSelection = prompt ("Please enter your choice");
-var playerSelection = caseInsensitive (playerSelection);
-var computerSelection = computerPlay();
-var outcome = playIf ();
+var playerSelectionDisplay = document.getElementById("user-choice");
+var computerSelectionDisplay = document.getElementById("computer-choice");
+var resultDisplay = document.getElementById("result");
+const choices = document.querySelectorAll("button");
+let playerSelection;
+let computerSelection;
+let result;
 
-var playerWins = 0;
-var computerWins = 0;
+choices.forEach (choice => choice.addEventListener('click', (e) => {
+playerSelection = e.target.id
+playerSelectionDisplay.innerHTML = playerSelection
+ computerPlay()
+ playRound()
+}))
+    
+
 
 //Create function for computer to play that returns a random value 
 function computerPlay() {
     var values = ["Rock", "Paper", "Scissors"]
-    valueToUse = values [Math.floor(Math.random()*values.length)];
-    return (valueToUse);
+    computerSelection = values [Math.floor(Math.random()*values.length)];
+    computerSelectionDisplay.innerHTML = computerSelection;
 }
 
-//Create case sensitive function
-function caseInsensitive (playerSelection){
-valuetoModify = playerSelection.toLowerCase();
-modified = valuetoModify.charAt(0).toUpperCase() + valuetoModify.slice(1);
-return modified;
-}
 
-function playIf () {
+//Function that plays the game
+function playRound (){
+resultDisplay.innerHTML = result;
 if ((playerSelection == "Rock") && (computerSelection == "Scissors")) {
-    return "You win! Rock beats Scissors";
+    result="You win! Rock beats Scissors";
 } 
 
-else if ((playerSelection == "Rock") && (computerSelection == "Paper")) {
-    return "You lose! Paper beats Rock";
+else if ((playerSelection== "Rock") && (computerSelection == "Paper")) {
+    result="You lose! Paper beats Rock";
 }  
 else if ((playerSelection == "Rock") && (computerSelection == "Rock")) {
-    return "TIE!";
+    result="TIE!";
 }
 else if ((playerSelection == "Paper")&& (computerSelection == "Rock")) {
-    return  "You win! Paper beats Rock";
+    result= "You win! Paper beats Rock";
 }
 else if ((playerSelection == "Paper")&& (computerSelection == "Scissors")) {
-    return "You lose! Scissors beat Paper";
+    result= "You lose! Scissors beat Paper"; 
 }
 else if ((playerSelection == "Paper") && (computerSelection == "Paper")) {
-    return "TIE!";
+    result= "TIE!";
 }
 else if ((playerSelection == "Scissors") && (computerSelection == "Paper")){
-    return  "You win! Scissors beat Paper"
+    result=  "You win! Scissors beat Paper"
 }
 else if ((playerSelection == "Scissors") && (computerSelection == "Rock")){
-    return  "You lose! Rock beats Scissors"
+    result=  "You lose! Rock beats Scissors"
 }
 else if ((playerSelection == "Scissors")&& (computerSelection == "Scissors")){
-    return  "TIE!"
+    result= "TIE!"
 }  
 }
-//Printing the outcomes
-console.log ("You play with " + playerSelection)
-console.log ("Computer plays with " + computerSelection)
-console.log (outcome)
-
-}
-var playerSelection;
-var computerSelection;
-
-console.log(playRound())
 
 
 
